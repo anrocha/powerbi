@@ -18,10 +18,11 @@ function ConvertToCSV(objArray) {
 
 const urlsText = Object.values(sessionStorage).find(x => x.includes('events'))
 const urlEvents = JSON.parse(urlsText).events
+const auth = JSON.parse(sessionStorage.token__pf);
 
 fetch(`${urlEvents}`, {
     "headers": {
-        "authorization": `Bearer ${sessionStorage.userToken}`,
+        "authorization": `${auth.token_type} ${auth.access_token}`,
     }
 })
     .then(res => res.json())
